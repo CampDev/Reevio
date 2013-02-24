@@ -6,7 +6,7 @@
 			
 3. Install Composer
 
-			composer.phar install
+			php composer.phar install
 			
 4. Rename app.ini.sample to app.ini
 5. Fill in your information in app.ini
