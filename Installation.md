@@ -1,4 +1,4 @@
-1. Download [Composer](http://getcomposer.com)
+1. Download [Composer](http://getcomposer.org)
 
 2. Move into the folder you'd like to install Reevio in 
 
