@@ -1,0 +1,8 @@
+{
+    "require": {
+        "depot/depot": "0.0.*@dev"
+    },
+    "require": {
+        "symfony/serializer": "~2.1@rc"
+    }
+}
