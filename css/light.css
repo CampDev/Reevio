@@ -1,9 +1,10 @@
 @import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,700|Open+Sans); /* Google Webfont import */
 @import url(http://fonts.googleapis.com/css?family=Rambla:400,700);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:300,400);
 
 /* General Style */
 body	{
-	font-size: 16px;
+	font-size: 13px;
 	font-family: 'Open Sans', sans-serif;
 	min-height: 100%;
 	height: auto;
@@ -18,21 +19,22 @@ body	{
 }
 
 #main {
-	border: 1px #E0E0E0 solid;
+	border: 1px #ccc solid;
 	background-color: #FFF;
 	margin: 10px auto 30px auto;
+    padding: 2%, 4%, 2%, 4%;
 }
 
 h1, h2, h3, h4, h5 {
-	font-family: 'Yanone Kaffeesatz', sans-serif;
-	font-weight: 700;
-	color: #3d3d3d;
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 300;
+	color: #222;
 	text-align: center;
 }
 
 h1 a {
 	text-decoration: none;
-	color: #3d3d3d;
+	color: #222;
 }
 
 nav {
@@ -80,6 +82,11 @@ article p a {
 	text-decoration: none;
 }
 
+article {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
 blockquote {
 	background-color: #DBDBDB;
 	color: #000;
@@ -123,9 +130,9 @@ img {
 
 .readmore a {
 	color: #0eade1;		
-	font-family: 'Yanone Kaffeesatz', sans-serif;
+	font-family: 'Ubuntu', sans-serif;
 	text-align: right;
-	font-weight: 400;
+	font-weight: 300;
 	text-decoration: none;
 }
 
@@ -139,11 +146,11 @@ img {
 #more_posts {
 	margin: 15px auto auto auto;
 	color: #000;
-	font-family: 'Yanone Kaffeesatz', sans-serif;
-	font-weight: 400;
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 300;
 	border-radius: 2px;
 	text-align: center;
-	font-size: 20px;
+	font-size: 15px;
 }
 
 footer {
@@ -183,6 +190,7 @@ iframe {
 /* Desktop */
 @media screen and (min-width: 771px) {
 	body {
+        font-size: 13px;
 		width: 100%;
 		min-width: 501px;
 	}
@@ -191,6 +199,7 @@ iframe {
 		width: 60%;
 		padding: 2% 4% 2% 4%;
 		float: left;
+        margin-left: 2%;
 	}
 
 	nav {
@@ -216,33 +225,31 @@ iframe {
 	article h1	{
 		height: auto;
 		min-height: 20px;
-		font-size: 40px;
-		font-size: 2.5rem;
+		font-size: 24px;
+        margin: 10px;
 	}
 
 	article h1 a{
-		font-size: 40px;
-		font-size: 2.5rem;
+		font-size: 24px;
 	}
 
 	div.time {
 		margin: auto;
 		text-align: center;
-		font-size: 16px;
-		font-size: 1rem;
+		font-size: 11px;
 	}
 
 	article p {
-		font-size: 18px;
+		font-size: 13px;
 		width: 100%;
 	}
 
 	.readmore a {
-		font-size: 18px;
+		font-size: 15px;
 	}
 
 	.seperator {
-		background-image: url('../images/seperator.svg');
+/*		background-image: url('../images/seperator.svg'); */
 		background-size: 100% 100%;
 	}
 
@@ -254,6 +261,7 @@ iframe {
 		height: auto;
 		background-color: #dcdcdc;
 		border: 1px #bdbdbd solid;
+        border-radius: 5px;
 	}
 
 	aside a {
@@ -284,20 +292,21 @@ iframe {
 		margin: auto;
 		width: 100%;
 		text-align: center;
-		font-weight: 700;
-		font-family: 'Yanone Kaffeesatz', sans-serif;
-		font-size: 30px;
-	}
-
-	#information {
-		font-family: 'Yanone Kaffeesatz', sans-serif;
-		width: 100%;
-		text-align: center;
+		font-weight: 300;
+		font-family: 'Ubuntu', sans-serif;
 		font-size: 20px;
 	}
 
+	#information {
+		font-family: 'Ubuntu', sans-serif;
+        font-weight: 300;
+		width: 100%;
+		text-align: center;
+		font-size: 13px;
+	}
+
 	#information a{
-		font-size: 18px;
+		font-size: 13px;
 	}
 
 	footer {
@@ -309,7 +318,7 @@ iframe {
 
 	footer p {
 		text-align: center;
-		font-size: 14px;
+		font-size: 12px;
 		font-size: 0.875rem;
 	}
 
@@ -381,7 +390,7 @@ iframe {
 	}
 
 	.seperator {
-		background-image: url('../images/seperator_iphone.svg');
+/*		background-image: url('../images/seperator_iphone.svg'); */
 		background-size: 100% 100%;
 	}
 

@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/light.css">
 <!-- Uncomment this line and comment the line above for another (blue) theme <link rel="stylesheet" type="text/css" href="css/style_blau.css"> -->
 <script type="text/javascript" src="scripts/live.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
