@@ -13,6 +13,7 @@ $language = $config['language'];
 if ($config['imprinturl'] !== '') {
 	$imprinturl = $config['imprinturl'];
 }
+$displayed_essays = $config['displayed_essays'];
 ?>
 <!DOCTYPE HTML>
 <html lang="<?php echo $language; ?>">
@@ -37,17 +38,16 @@ if ($config['imprinturl'] !== '') {
 		$server = $client->discover($entityUri);
 
 		$essayPostCriteria = new Depot\Core\Model\Post\PostCriteria;
-		$essayPostCriteria->limit = 10;
+		if($displayed_essays !== '') {
+			$essayPostCriteria->limit = $displayed_essays;
+		}
+		else {
+			$essayPostCriteria->limit = 10;
+		}
 		$essayPostCriteria->postTypes = array('https://tent.io/types/post/essay/v0.1.0', );
 
 		$essayPostListResponse = $client->posts()->getPosts($server, $essayPostCriteria); 
 		?>
-		<script>
-  $(document).ready(function(){
-    // Target your .container, .wrapper, .post, etc.
-    $("div").fitVids();
-  });
-</script>
 </head>
 
 <body>
@@ -77,7 +77,6 @@ if ($config['imprinturl'] !== '') {
 			echo '<div class="seperator"></div>';
 		}
 		?>
-		<div id="more_posts">Load more posts</div>
 	</div>
 	<?php include_once('includes/sidebar.php'); ?>
 	<div class="clear"></div>

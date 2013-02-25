@@ -5,6 +5,7 @@ $entityUri = $config['entity_uri'];
 $ClientFactory = new Depot\Api\Client\ClientFactory;
 $client = $ClientFactory->create();
 $server = $client->discover($entityUri);
+$statuses_sidebar = $config['statuses_sidebar'];
 
 //Profile fetching
 $basicProfileInfo = $server->entity()->findProfileInfo('https://tent.io/types/info/basic/v0.1.0')->content();
@@ -18,6 +19,12 @@ $bio = $basicProfileInfo['bio']; //Bio
 
 //Status fetching
 $statusPostCriteria = new Depot\Core\Model\Post\PostCriteria;
+if($statuses_sidebar !== '') {
+			$statusPostCriteria->limit = $statuses_sidebar;
+		}
+	else {
+			$statusPostCriteria->limit = 15;
+	}
 $statusPostCriteria->limit = 5;
 $statusPostCriteria ->postTypes = array('https://tent.io/types/post/status/v0.1.0', );
 $statusListRepsonse = $client->posts()->getPosts($server, $statusPostCriteria);

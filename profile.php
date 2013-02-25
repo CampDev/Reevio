@@ -13,13 +13,19 @@
 	if ($config['imprinturl'] !== '') {
 		$imprinturl = $config['imprinturl'];
 	}
+	$displayed_statuses = $config['statuses_profile'];
 
 	$clientFactory = new Depot\Api\Client\ClientFactory;
 	$client = $clientFactory->create();
 	$server = $client->discover($entityUri);
 
 	$statusPostCriteria = new Depot\Core\Model\Post\PostCriteria;
-	$statusPostCriteria->limit = 20;
+	if($displayed_statuses !== '') {
+			$statusPostCriteria->limit = $displayed_statuses;
+		}
+	else {
+			$statusPostCriteria->limit = 15;
+	}
 	$statusPostCriteria->postTypes = array('https://tent.io/types/post/status/v0.1.0', );
 	$statusListResponse = $client->posts()->getPosts($server, $statusPostCriteria);
 	include_once('includes/profile.php');
