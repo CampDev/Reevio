@@ -32,7 +32,7 @@ echo '<rss version="2.0">';
 	<language><?php echo $language; ?></language> 
 	<pubDate><?php echo date('r'); ?></pubDate>
 	<lastBuildDate><?php echo date('r'); ?></lastBuildDate>
-	<generator>Campground</generator>
+	<generator>Reevio</generator>
 
 	<?php 
 		foreach ($essayPostListResponse->posts() as $post) {
