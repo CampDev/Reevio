@@ -51,7 +51,7 @@ include_once('includes/globals.php');
 	<div id="main" role="main">
 		<?php
 		echo '<article>';
-		if ($content['title'] !== '') { 
+		if (isset($content['title'])) { 
 			echo '<h1>', $content['title'], '</h1>';
 		}
 		else {
