@@ -63,8 +63,11 @@ $displayed_essays = $config['displayed_essays'];
 		foreach ($essayPostListResponse->posts() as $post) {
 			$content = $post->content();
 			echo '<article>';
-			if (isset($content['title'])) { 
+			if ($content['title'] !== '') { 
 				echo '<h1><a href="article.php?id=', $post->id(), '" title="', $content['title'], '">', $content['title'], '</a></h1>';
+			}
+			else {
+				echo '<h1><a href="article.php?id=', $post->id(), '">Untitled</a></h1>';
 			}
 			echo '<div class="time">', date('r', $post->publishedAt()), '</div>';
 			if ($content['excerpt'] !== '') {

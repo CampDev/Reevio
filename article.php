@@ -51,8 +51,11 @@ include_once('includes/globals.php');
 	<div id="main" role="main">
 		<?php
 		echo '<article>';
-		if (isset($content['title'])) { 
+		if ($content['title'] !== '') { 
 			echo '<h1>', $content['title'], '</h1>';
+		}
+		else {
+			echo '<h1>Untitled</h1>';
 		}
 		echo '<div class="time">', date('r', $post->publishedAt()), '</div>';
 		echo '<div class="seperator"></div>';
