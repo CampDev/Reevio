@@ -1,4 +1,7 @@
 {% extends "layout.twig" %}
+{% if post.content.title is defined %}
+{% set title %}{{ post.content.title }}{% endset %}
+{% endif %}
 {% block content %}
     <article>
         <h1>

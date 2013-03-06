@@ -3,7 +3,14 @@
 <head>
     <script type="text/javascript">$('iframe').wrap('<div class="video" />');</script>
     <meta charset="utf-8">
-    {% include "html_header.twig" %}
+    <link rel="stylesheet" type="text/css" href="{{ app.request.baseUrl }}/css/light.css">
+    <!-- Uncomment this line and comment the line above for another (blue) theme <link rel="stylesheet" type="text/css" href="css/style_blau.css"> -->
+    <script type="text/javascript" src="{{ app.request.baseUrl }}/scripts/live.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script type="text/javascript">window.scrollTo(0,0)</script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ app.request.baseUrl }}/scripts/youtube.js"></script>
+    <script type="text/javascript" src="{{ app.request.baseUrl }}/scripts/vimeo.js"></script>
     {% if title is defined %}
     <title>{{ title }} - {{ reevio.blogtitle }}</title>
     {% else %}
@@ -23,6 +30,11 @@
         {% include "sidebar.twig" %}
         <div class="clear"></div>
     </div>
-    {% include "footer.twig" %}
+    <footer>
+        {% if imprinturl is defined %}
+            <p><a href="{{ imprinturl }}">Imprint</a></p>
+        {% endif %}
+        <p>Powered by <a href="http://cacauu.de/reevio/" rel="nofollow">Reevio</a></p>
+    </footer>
 </body>
 </html>
