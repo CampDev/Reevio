@@ -67,6 +67,10 @@ $app->get('/post/{id}', function ($id) use ($app) {
     ));
 })->bind('post');
 
+$app->get('/profile', function () use ($app) {
+    return $app['twig']->render('profile.twig');
+})->bind('profile');
+
 $app->get('/rss.xml', function () use ($app) {
     $postCriteria = new Depot\Core\Model\Post\PostCriteria;
     $postCriteria->limit = $app['reevio.config']['displayed_essays'] ?: 10;
