@@ -1,0 +1,39 @@
+<aside> <!-- Sidebar -->
+	<div id="avatar"><img src="{{ profile.basic.avatar_url }}" /></div>
+	<div id="name">{{ profile.basic.name }}</div>
+	<div id="clear"></div>
+	<div id="information">
+		{% if profile.basic.gender %}
+			<div class="information">{{ profile.basic.gender }}</div>
+		{% endif %}
+		{% if profile.basic.location %}
+			<div class="information">{{ profile.basic.location }}</div>
+		{% endif %}
+		{% if profile.basic.birthdate %}
+			<div class="information">{{ profile.basic.birthdate }}</div>
+		{% endif %}
+		{% if profile.basic.website_url %}
+			<div class="information"><a href="{{ profile.basic.website_url }}">{{ profile.basic.website_url }}</a></div>
+		{% endif %}
+	</div>
+	<div class="seperator"></div>
+	<div id="bio"><?php echo $bio; ?></div>
+	<div class="seperator"></div>
+	<!--
+	<div style="margin: auto; text-align:center;">
+		Any buttons or information you'd like to have in your sidebar goes here (examples: Flattr button or links to your tent-profile etc.)
+		But don't forget to remove the comments around the div ;)
+	</div>
+	<div class="seperator"></div>
+	-->
+	{% if recent_statuses %}
+	<div id="status">
+		{% for status in recent_statuses %}
+			{% if not status.mentions %}
+				<div class="status"><a href="{{ reevio.entity_uri }}/posts/{{ status.id }}">{{ status.content.text }}</a></div>
+			{% endif %}
+		{% endfor %}
+	</div>
+	{% endif %}
+	<div class="clear_head"></div>
+</aside>
