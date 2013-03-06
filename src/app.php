@@ -1,6 +1,6 @@
 <?php
 
-$app['reevio.config'] = parse_ini_file(__DIR__.'/app.ini');
+$app['reevio.config'] = parse_ini_file(__DIR__.'/../app.ini');
 
 $app['depot.client_factory'] = $app->share(function () {
     return new Depot\Api\Client\ClientFactory;
@@ -36,7 +36,10 @@ $app['depot.recent_statuses'] = $app->share(function () use ($app) {
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider);
 
 $app->register(new Silex\Provider\TwigServiceProvider, array(
-    'twig.path' => __DIR__.'/views',
+    'twig.path' => array(
+        __DIR__.'/../views/custom/',
+        __DIR__.'/../views/core/',
+    ),
 ));
 
 $app['twig'] = $app->share($app->extend('twig', function ($twig, $c) {
