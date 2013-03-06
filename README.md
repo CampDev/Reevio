@@ -24,7 +24,7 @@ We'd like to know if you're using Reevio! If you have decided to use our softwar
 
 	git clone https://github.com/reevio/reevio.git
 
-###3. Install Composer
+###3. Install Dependencies
 
 #### If you already have Composer
 
@@ -33,10 +33,6 @@ We'd like to know if you're using Reevio! If you have decided to use our softwar
 #### If you need Composer
 
 	curl -s https://getcomposer.org/installer | php
-	php composer.phar install --dev
-			
-###3. Install Dependencies
-
 	php composer.phar install
 			
 ###4. Rename app.ini.sample to app.ini
