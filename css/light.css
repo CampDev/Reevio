@@ -249,7 +249,6 @@ iframe {
 	}
 
 	.seperator {
-/*		background-image: url('../images/seperator.svg'); */
 		background-size: 100% 100%;
 	}
 
@@ -286,6 +285,8 @@ iframe {
 		border-radius: 50%;
 		height: auto;
 		width: 100%;
+		background-color: #b5b5b5;
+		box-shadow: 0px 1px 3px #595959;
 	}
 
 	#name {
