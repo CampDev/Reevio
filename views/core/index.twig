@@ -1,5 +1,6 @@
 {% extends "layout.twig" %}
 {% block content %}
+    {% if posts %}
     {% for post in posts %}
         <article>
             <h1>
@@ -23,6 +24,7 @@
             <div class="seperator"></div>
         </article>
     {% endfor %}
+    {% else %}No essays to speak of{% endif %}
     <ul>
         {% if since %}<li><a href="{{ path('index', {'since': since }) }}">&larr; Newer Posts</a></li>{% endif %}
         {% if before %}<li><a href="{{ path('index', {'before': before }) }}">Older Posts &rarr;</a></li>{% endif %}
