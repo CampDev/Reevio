@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="{{ app.request.baseUrl }}/css/light.css">
+    <!-- Uncomment this line and comment the line above for another (blue) theme <link rel="stylesheet" type="text/css" href="css/style_blau.css"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <script type="text/javascript">window.scrollTo(0,0)</script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -17,8 +18,10 @@
 </head>
 
 <body>
+<div class="wrapper">
     <nav> <!-- Page navigation -->
         <a href="{{ path('feed') }}" class="feed"></a>
+        <a href="{{ path('profile') }}" class="profile"></a>
     </nav>
     <div class="clear_head"></div>
     <div id="container">
@@ -28,6 +31,8 @@
         {% include "sidebar.twig" %}
         <div class="clear"></div>
     </div>
+<div class="push"></div>
+</div>
     <footer>
         {% if imprinturl is defined %}
             <p><a href="{{ imprinturl }}">Imprint</a></p>
