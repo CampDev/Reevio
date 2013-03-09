@@ -240,7 +240,7 @@ iframe {
 	}
 
 	article p {
-		font-size: 13px;
+		font-size: 15px;
 		width: 100%;
 	}
 
@@ -352,16 +352,6 @@ iframe {
 		float: left;
 	}
 
-	nav a.profile {
-		width: 25px;
-		height: 25px;
-		float: right;
-		background-image: url('../images/user.svg');
-		background-repeat: no-repeat;
-		background-size: 100% 100%;
-		display: block;
-	}
-
 	article h1	{
 		height: auto;
 		min-height: 20px;
@@ -391,12 +381,13 @@ iframe {
 	}
 
 	.seperator {
-/*		background-image: url('../images/seperator_iphone.svg'); */
 		background-size: 100% 100%;
 	}
 
 	aside {
-		display: none;
+		display: block;
+		width: 94%;
+		padding: 3%;
 	}
 
 	#profile {
@@ -410,12 +401,16 @@ iframe {
 		width: 50%;
 		height: auto;
 		margin: auto;
+		float: left;
+		max-width: 200px;
 	}
 
 	#avatar img {
 		border-radius: 50%;
 		height: auto;
 		width: 100%;
+		background-color: #b5b5b5;
+		box-shadow: 0px 1px 3px #595959;
 	}
 
 	#name {
@@ -456,5 +451,4 @@ iframe {
 	footer p a {
 		text-decoration: none;
 	}
-
 }

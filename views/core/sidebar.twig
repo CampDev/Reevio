@@ -27,6 +27,7 @@
 	<div class="seperator"></div>
 	-->
 	{% if recent_statuses %}
+	<h1>Latest statuses</h1>
 	<div id="status">
 		{% for status in recent_statuses %}
 			{% if not status.mentions %}
