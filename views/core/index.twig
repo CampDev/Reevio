@@ -3,7 +3,7 @@
     {% if posts %}
     {% for post in posts %}
         <article>
-            <h1>
+            <h1 class="superheading">
                 {% if post.content.title is defined %}
                     <a href="{{ path('post', {'id':post.id}) }}" title="{{ post.content.title }}">{{ post.content.title }}</a>
                 {% else %}

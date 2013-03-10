@@ -7,6 +7,7 @@
 * {
 	margin: 0;
 }
+
 html, body {
 	height: 100%;
 }
@@ -47,10 +48,19 @@ h1, h2, h3, h4, h5 {
 	font-family: 'Ubuntu', sans-serif;
 	font-weight: 300;
 	color: #222;
+	text-align: left;
+}
+
+h2 {
+	margin-top: 30px; 
+	margin-bottom: 5px;
+}
+
+h1.superheading {
 	text-align: center;
 }
 
-h1 a {
+h1.superheading a {
 	text-decoration: none;
 	color: #222;
 }
@@ -93,6 +103,7 @@ article p {
 	-ms-hyphens: auto;
 	-o-hyphens: auto;
 	hyphens: auto;
+	margin: 1rem !important;
 }
 
 article p a {
