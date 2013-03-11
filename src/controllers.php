@@ -5,7 +5,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 $app->get('/', function (Request $request) use ($app) {
     $postCriteria = new Depot\Core\Model\Post\PostCriteria;
-    $postCriteria->limit = $app['reevio.config']['displayed_essays'] ?: 10;
+    $postCriteria->limit = isset($app['reevio.config']['displayed_essays'])
+        ? $app['reevio.config']['displayed_essays']
+        : 10;
     $postCriteria->postTypes = array('https://tent.io/types/post/essay/v0.1.0');
 
     $paginated = false;
