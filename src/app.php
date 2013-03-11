@@ -23,7 +23,9 @@ $app['depot.profile.basic'] = $app->share(function () use ($app) {
 $app['depot.recent_statuses'] = $app->share(function () use ($app) {
     $postCriteria = new Depot\Core\Model\Post\PostCriteria;
     $postCriteria->postTypes = array('https://tent.io/types/post/status/v0.1.0');
-    $postCriteria->limit = $app['reevio.config']['statuses_sidebar'] ?: 15;
+    $postCriteria->limit = isset($app['reevio.config']['statuses_sidebar'])
+        ? $app['reevio.config']['statuses_sidebar']
+        : 15;
 
     $statusListRepsonse = $app['depot.client']->posts()->getPosts(
         $app['depot.server'],
