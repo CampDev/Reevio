@@ -46,6 +46,9 @@ Download [Posts.php](http://cl.ly/code/200U1a2Y352b) and replace ```/vendor/depo
 
 ###6. Fill in your information in app.ini
 
+##System Requirements
+
+To install and run Reevio you need a server running PHP 5.3.2 or higher. 
 
 ##Contact
 
