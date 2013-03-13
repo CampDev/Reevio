@@ -38,13 +38,7 @@ We'd like to know if you're using Reevio! If you have decided to use our softwar
 			
 ###4. Rename app.ini.sample to app.ini
 
-###5. Replace this file
-
-This is only temporary but necessary until we found a better solution for this
-
-Download [Posts.php](http://cl.ly/code/200U1a2Y352b) and replace ```/vendor/depot/depot/src/Depot/Api/Client/Server/Posts.php``` with the file you just downloaded.
-
-###6. Fill in your information in app.ini
+###5. Fill in your information in app.ini
 
 ##System Requirements
 
