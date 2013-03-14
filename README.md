@@ -14,6 +14,7 @@ We'd like to know if you're using Reevio! If you have decided to use our softwar
 * &! (bitandbang), Blog: [bnb.im](http://bnb.im "Web-driven college student who loves Tent."), Tentity: ^[bnb.tent.is](https://bnb.tent.is "Tent Entity.")
 * Cacauu, Blog: [cacauu.de](http://cacauu.de "German technonlogy-lover who blogs about technology, coding, photography and some other things"), Tentity: ^[cacauu.tent.is](https://cacauu.tent.is "Tent Entity.")
 * Reevio, Blog: [Official Reevio Blog](http://cacauu.de/reevio), Tentity: ^[reevio.tent.is](https://reevio.tent.is)
+* shawnj, Blog: [r.shawnj.co](http://r.shawnj.co "Person"), Tentity [^shawnj.tent.is](https://shawnj.tent.is)
 
 ##Installation
 
