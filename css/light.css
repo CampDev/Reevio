@@ -217,6 +217,11 @@ iframe {
 	border: 3px #676766 solid;
 }
 
+.video {
+	margin: auto;
+	text-align: center;
+}
+
 /* Desktop */
 @media screen and (min-width: 771px) {
 	body {
