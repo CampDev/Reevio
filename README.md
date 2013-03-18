@@ -45,6 +45,11 @@ We'd like to know if you're using Reevio! If you have decided to use our softwar
 
 To install and run Reevio you need a server running PHP 5.3.2 or higher. 
 
+##Change the style
+
+If you want to change the style of Reevio, the easiest way to do that is to change the things in ```css/light.css``` because all the tags, classes and ids used in Reevio can be seen and edited there. There's only one thing you have to remember: By default, Reevio uses ```css/light.min.css``` to make the page load even faster, so all the changes you do to light.css won't be displayed anywhere. If you want to change your style, open ```views/Core/layout.twig``` and change the source from the stylesheet from ```css/light.min.css``` to ```css/light.css```.
+If you want to use a minified stylesheet with your changes after that again, I recommend you to use [Smaller](http://smallerapp.com/) on your Mac and change the source from the stylesheet on layout.twig back again.
+
 ##Contact
 
 If you have any questions, ideas or problems, contact Yannik on [Tent](https://cacauu.tent.is).
