@@ -74,7 +74,7 @@ $app['reevio.profile'] = $app->share(function () use ($app) {
 });
 
 $app['reevio.recent_statuses'] = $app->share(function () use ($app) {
-	$status_url = $app['reevio.config']['entity_uri'].'posts?limit='.$app['reevio.config']['statuses_sidebar'].'&types=https://tent.io/types/status/v0#';
+	$status_url = $app['reevio.config']['entity_uri'].'posts?limit='.$app['reevio.config']['statuses_sidebar'].'&types=https%3A%2F%2Ftent.io%2Ftypes%2Fstatus%2Fv0%23';
 	$posts = recent_statuses($status_url);
 
 	return $posts;

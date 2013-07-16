@@ -7,7 +7,7 @@
 	<description>{{ reevio.description }}</description>
 	<language>{{ reevio.language }}</language>
 	<pubDate>{{ "now"|date('r') }}</pubDate>
-	<lastBuildDate>{{ "now"|date('r') }}</lastBuildDate>
+	<lastBuildDate>{{ "now"|date('Y-M-j - H:i') }}</lastBuildDate>
 	<generator>Reevio</generator>
 	{% for post in posts %}
 		<item>
@@ -15,11 +15,11 @@
 				{% if post.content.title is defined %}
 					{{ post.content.title }}
 				{% else %}
-					Essay -  {{ post.publishedAt }}
+					Essay -  {{ post.published_at }}
 				{% endif %}
 			</title>
 			<link>{{ url('post', {'id': post.id}) }}</link>
-			<pubDate>{{ post.publishedAt|date("r") }}</pubDate>
+			<pubDate>{{ post.published_at|date("Y-M-j - H:i") }}</pubDate>
 			<source>{{ url('feed') }}</source>
 			{% if post.content.excerpt is defined and post.content.excerpt %}
 				<description>{{ post.content.excerpt }}</description>

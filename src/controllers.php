@@ -13,7 +13,7 @@ function request_posts($url) {
 }
  
 $app->get('/', function () use ($app) {
-	$req_url = $app['reevio.config']['entity_uri'].'posts?types=https://tent.io/types/essay/v0&limit='.$app['reevio.config']['displayed_essays'];
+	$req_url = $app['reevio.config']['entity_uri'].'posts?types=https%3A%2F%2Ftent.io%2Ftypes%2Fessay%2Fv0&limit='.$app['reevio.config']['displayed_essays'];
 	$post = request_posts($req_url);
  
 	return $app['twig']->render('index.twig', array(
@@ -33,11 +33,11 @@ $app->get('/post/{id}', function ($id) use ($app) {
  
 //RSS
 $app->get('/rss.xml', function () use ($app) {
-	$req_url = $app['reevio.config']['server_uri'].'posts?post_types=https://tent.io/types/post/essay/v0.1.0';
+	$req_url = $app['reevio.config']['entity_uri'].'posts?types=https%3A%2F%2Ftent.io%2Ftypes%2Fessay%2Fv0';
 	$post = request_posts($req_url);
  
     $response = new Response($app['twig']->render('rss.twig', array(
-        'posts' => $post,
+        'posts' => $post->posts,
     )));
      
 $response->headers->set('Content-type', 'text/xml');
