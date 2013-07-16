@@ -1,89 +1,46 @@
 <?php
-
+ 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
-$app->get('/', function (Request $request) use ($app) {
-    $postCriteria = new Depot\Core\Model\Post\PostCriteria;
-    $postCriteria->limit = isset($app['reevio.config']['displayed_essays'])
-        ? $app['reevio.config']['displayed_essays']
-        : 10;
-    $postCriteria->postTypes = array('https://tent.io/types/post/essay/v0.1.0');
-
-    $paginated = false;
-
-    if ($request->query->get('since')) {
-        $paginated = true;
-        $postCriteria->sinceId = $request->query->get('since');
-        $postCriteria->sinceIdEntity = $app['reevio.config']['entity_uri'];
-    }
-
-    if ($request->query->get('before')) {
-        $paginated = true;
-        $postCriteria->beforeId = $request->query->get('before');
-        $postCriteria->beforeIdEntity = $app['reevio.config']['entity_uri'];
-    }
-
-    $postListResponse = $app['depot.client']->posts()->getPosts(
-        $app['depot.server'],
-        $postCriteria
-    );
-
-    $since = null;
-    if ($postListResponse->previousCriteria()) {
-        $previousPostListResponse = $app['depot.client']->posts()->getPosts(
-            $app['depot.server'],
-            $postListResponse->previousCriteria()
-        );
-        if ($previousPostListResponse->posts()) {
-            $since = $postListResponse->previousCriteria()->sinceId;
-        }
-    }
-
-    $before = null;
-    if ($postListResponse->nextCriteria()) {
-        $nextPostListResponse = $app['depot.client']->posts()->getPosts(
-            $app['depot.server'],
-            $postListResponse->nextCriteria()
-        );
-        if ($nextPostListResponse->posts()) {
-            $before = $postListResponse->nextCriteria()->beforeId;
-        }
-    }
-
-    return $app['twig']->render('index.twig', array(
-        'posts' => $postListResponse->posts(),
-        'since' => $since,
-        'before' => $before,
+ 
+function request_posts($url) {
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$post = json_decode(curl_exec($ch));
+	curl_close($ch);
+	return $post;
+}
+ 
+$app->get('/', function () use ($app) {
+	$req_url = $app['reevio.config']['entity_uri'].'posts?types=https://tent.io/types/essay/v0&limit='.$app['reevio.config']['displayed_essays'];
+	$post = request_posts($req_url);
+ 
+	return $app['twig']->render('index.twig', array(
+        'posts' => $post->posts,
     ));
 })->bind('index');
-
+ 
+//Single-Post
 $app->get('/post/{id}', function ($id) use ($app) {
-    $post = $app['depot.client']->posts()->getPost(
-        $app['depot.server'],
-        $id
-    );
-
-    return $app['twig']->render('post.twig', array(
-        'post' => $post,
+	$entity_url = urlencode(substr($app['reevio.config']['entity_uri'], 0, strlen($app['reevio.config']['entity_uri'])-1));
+	$req_url = $app['reevio.config']['entity_uri'].'posts/'.$entity_url.'/'.$id;
+	$post = request_posts($req_url);
+	return $app['twig']->render('post.twig', array(
+        'post' => $post->post,
     ));
 })->bind('post');
-
+ 
+//RSS
 $app->get('/rss.xml', function () use ($app) {
-    $postCriteria = new Depot\Core\Model\Post\PostCriteria;
-    $postCriteria->limit = $app['reevio.config']['displayed_essays'] ?: 10;
-    $postCriteria->postTypes = array('https://tent.io/types/post/essay/v0.1.0');
-
-    $postListResponse = $app['depot.client']->posts()->getPosts(
-        $app['depot.server'],
-        $postCriteria
-    );
-
+	$req_url = $app['reevio.config']['server_uri'].'posts?post_types=https://tent.io/types/post/essay/v0.1.0';
+	$post = request_posts($req_url);
+ 
     $response = new Response($app['twig']->render('rss.twig', array(
-        'posts' => $postListResponse->posts(),
+        'posts' => $post,
     )));
-
-    $response->headers->set('Content-type', 'text/xml');
-
+     
+$response->headers->set('Content-type', 'text/xml');
+ 
     return $response;
 })->bind('feed');
