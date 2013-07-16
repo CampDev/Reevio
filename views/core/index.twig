@@ -10,7 +10,7 @@
                     <a href="{{ path('post', {'id':post.id}) }}">Untitled</a>
                 {% endif %}
             </h1>
-            <div class="time">{{ post.published_at|date('r') }}</div>
+            <div class="time">{{ post.published_at|date('Y-M-j - H:i') }}</div>
             {% if post.content.excerpt is defined and post.content.excerpt %}
                 <p>{{ post.content.excerpt }}</p>
                 <div class="readmore"><a href="{{ path('post', {'id':post.id}) }}">Read more &rarr;</a></div>
