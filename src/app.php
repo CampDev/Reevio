@@ -48,8 +48,6 @@ function discover_link($entity_uri, $debug){
 	    return $meta;
 }
 
-$meta = discover_link($app['reevio.config']['entity_uri'], false);
-
 function recent_statuses($url) {
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $url);
@@ -69,6 +67,7 @@ function request_profile($profile_url) {
 }
 
 $app['reevio.profile'] = $app->share(function () use ($app) {
+    $meta = discover_link($app['reevio.config']['entity_uri'], false);
 	$profile = $meta->post->content->profile;
 	return $profile;
 });
@@ -76,7 +75,6 @@ $app['reevio.profile'] = $app->share(function () use ($app) {
 $app['reevio.recent_statuses'] = $app->share(function () use ($app) {
 	$status_url = $app['reevio.config']['entity_uri'].'posts?limit='.$app['reevio.config']['statuses_sidebar'].'&types=https%3A%2F%2Ftent.io%2Ftypes%2Fstatus%2Fv0%23';
 	$posts = recent_statuses($status_url);
-
 	return $posts;
 });
 
@@ -90,6 +88,18 @@ $app->register(new Silex\Provider\TwigServiceProvider, array(
 ));
 
 $app['twig'] = $app->share($app->extend('twig', function ($twig, $c) {
+
+    $tent_markdown = new Twig_SimpleFunction('tent_markdown', function($status) {
+        $markdown_status = preg_replace("/\*(.*)\*/", "<b>$1</b>", $status); 
+        $markdown_status = preg_replace("/\_(.*)\_/", "<em>$1</em>", $markdown_status);
+        $markdown_status = preg_replace("/\~(.*)\~/", "<del>$1</del>", $markdown_status);
+        $markdown_status = preg_replace("/\`(.*)\`/", "<code>$1</code>", $markdown_status);
+        $markdown_status = preg_replace("/\[(.*)\]\((.*)\)/", "<a href='$2'>$1</a>", $markdown_status);
+        return $markdown_status;
+    },array('is_safe' => array('html')));
+    
+    $twig->addFunction($tent_markdown);
+
     $twig->addGlobal('reevio', $c['reevio.config']);
 
     $twig->addGlobal('recent_statuses', $c['reevio.recent_statuses']);
