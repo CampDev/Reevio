@@ -3,7 +3,7 @@
 	<h1>Latest statuses</h1>
 	<div id="status">
 		{% for status in recent_statuses %}
-			<div class="status"><a href="{{ reevio.sidebar_link }}">{{ status.content.text }}</a></div>
+			<div class="status">{{ tent_markdown(status.content.text) }}</div>
 		{% endfor %}
 	</div>
 	{% endif %}
