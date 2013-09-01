@@ -1,0 +1,34 @@
+<aside> <!-- Sidebar -->
+	<div id="avatar"><img src="{{ avatar }}" /></div>
+	{% if profile.name %}
+		<div id="name">{{ profile.name }}</div>
+	{% endif %}
+	<div id="clear"></div>
+	<div id="information">
+		{% if profile.location %}
+			<div class="information">{{ profile.location }}</div>
+		{% endif %}
+		{% if profile.website %}
+			<div class="information"><a href="{{ profile.website }}">{{ profile.website }}</a></div>
+		{% endif %}
+	</div>
+	<div class="seperator"></div>
+	<div id="bio">{{ profile.bio }}</div>
+	<div class="seperator"></div>
+	<!--
+	<div style="margin: auto; text-align:center;">
+		Any buttons or information you'd like to have in your sidebar goes here (examples: Flattr button or links to your tent-profile etc.)
+		But don't forget to remove the comments around the div ;)
+	</div>
+	<div class="seperator"></div>
+	-->
+	{% if recent_statuses %}
+	<h1>Latest statuses</h1>
+	<div id="status">
+		{% for status in recent_statuses %}
+			<div class="status">{{ tent_markdown(status.content.text) }}</div>
+		{% endfor %}
+	</div>
+	{% endif %}
+	<div class="clear_head"></div>
+</aside>

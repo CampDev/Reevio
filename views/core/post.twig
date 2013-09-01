@@ -1,0 +1,26 @@
+{% extends "layout.twig" %}
+{% if post.content.title is defined %}
+{% set title %}{{ post.content.title }}{% endset %}
+{% else %}
+{% set title %}Untitled{% endset %}
+{% endif %}
+{% block content %}
+    <article>
+        <h1 class="superheading">
+            {% if post.content.title is defined %}
+                {{ post.content.title }}
+            {% else %}
+                Untitled
+            {% endif %}
+        </h1>
+        <div class="time">{{ post.published_at|date('Y-M-j - H:i') }}</div>
+        <div class="seperator"></div>
+        {{ post.content.body|raw }}
+    </article>
+    <!--
+    <div style="margin: auto; text-align:center;">
+        Any buttons or information you'd like to have below every article goes here (example: Flattr button)
+        But don't forget to remove the comments around the div ;)
+    </div>
+    -->
+{% endblock %}

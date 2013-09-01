@@ -1,0 +1,28 @@
+{% extends "layout.twig" %}
+{% block content %}
+    {% if posts %}
+    {% for post in posts %}
+        <article>
+            <h1 class="superheading">
+                {% if post.content.title is defined %}
+                    <a href="{{ path('post', {'id':post.id}) }}" title="{{ post.content.title }}">{{ post.content.title }}</a>
+                {% else %}
+                    <a href="{{ path('post', {'id':post.id}) }}">Untitled</a>
+                {% endif %}
+            </h1>
+            <div class="time">{{ post.published_at|date('Y-M-j - H:i') }}</div>
+            {% if post.content.excerpt is defined and post.content.excerpt %}
+                <p>{{ post.content.excerpt }}</p>
+                <div class="readmore"><a href="{{ path('post', {'id':post.id}) }}">Read more &rarr;</a></div>
+            {% else %}
+                {% if post.content.body is defined %}
+                    <p>{{ post.content.body|raw }}</p>
+                {% elseif post.content.text is defined %}
+                    <p>{{ post.content.text }}</p>
+                {% endif %}
+            {% endif %}
+            <div class="seperator"></div>
+        </article>
+    {% endfor %}
+    {% else %}No essays to speak of{% endif %}
+{% endblock %}
