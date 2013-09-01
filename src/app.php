@@ -56,7 +56,13 @@ function request_profile($entity_uri) {
 }
 
 function request_avatar($entity_uri) {
-    $api_endpoint = discover_link($entity_uri);
+    $entity_sub = $entity_sub = substr($entity_uri, 0, strlen($entity_uri)-1);
+    $avatar_endpoint = discover_link($entity_uri)->post->content->servers[0]->urls->post_attachment;
+    $avatar_endpoint = str_replace("{entity}", urlencode($entity_sub), $avatar_endpoint);
+    $avatar_endpoint = str_replace("{post}", "meta", $avatar_endpoint);
+    $avatar_endpoint = str_replace("{name}", "avatar.jpeg", $avatar_endpoint);
+    $avatar_url = get_headers($avatar_endpoint);
+    $avatar = $entity_sub.str_replace('Location: ','', $avatar_url[5]);
     return $avatar;
 }
 
@@ -68,6 +74,11 @@ $app['reevio.profile'] = $app->share(function () use ($app) {
     $meta = discover_link($app['reevio.config']['entity_uri'], false);
 	$profile = $meta->post->content->profile;
 	return $profile;
+});
+
+$app['reevio.avatar'] = $app->share(function () use($app) {
+    $avatar = request_avatar($app['reevio.config']['entity_uri']);
+    return $avatar;
 });
 
 $app['reevio.recent_statuses'] = $app->share(function () use ($app) {
@@ -102,6 +113,7 @@ $app['twig'] = $app->share($app->extend('twig', function ($twig, $c) {
 
     $twig->addGlobal('recent_statuses', $c['reevio.recent_statuses']);
     $twig->addGlobal('profile', $c['reevio.profile']);
+    $twig->addGlobal('avatar', $c['reevio.avatar']);
 
     return $twig;
 }));
