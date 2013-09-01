@@ -1,8 +1,8 @@
 entity_uri = https://entity.tent-server.com
-bloghost = http://cacauu.de
-blogtitle = Cacauu
-imprinturl = http://cacauu.de/imprint.php
+bloghost = http://example.com
+blogtitle = My Blog
+imprinturl = http://example.com/imprint.php
 language = en
-description = Blog about technology, coding and other stuff
+description = My awesome blog about great stuff
 displayed_essays = 10
 statuses_sidebar = 5
