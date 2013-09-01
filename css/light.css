@@ -127,7 +127,7 @@ blockquote {
 blockquote p {
 	padding: 2%;
 	margin: 0 auto;
-	width: 96%;
+	width: 94% !important;
 }
 
 blockquote::selection, blockquote::-moz-selection {
