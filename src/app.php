@@ -56,11 +56,11 @@ function request_profile($entity_uri) {
 }
 
 function request_avatar($entity_uri) {
-    $entity_sub = $entity_sub = substr($entity_uri, 0, strlen($entity_uri)-1);
+    $entity_sub = substr($entity_uri, 0, strlen($entity_uri)-1);
     $avatar_endpoint = discover_link($entity_uri)->post->content->servers[0]->urls->post_attachment;
     $avatar_endpoint = str_replace("{entity}", urlencode($entity_sub), $avatar_endpoint);
     $avatar_endpoint = str_replace("{post}", "meta", $avatar_endpoint);
-    $avatar_endpoint = str_replace("{name}", "avatar.jpeg", $avatar_endpoint);
+    $avatar_endpoint = str_replace("{name}", discover_link($entity_uri)->post->attachments[0]->name, $avatar_endpoint);
     $avatar_url = get_headers($avatar_endpoint);
     $avatar = $entity_sub.str_replace('Location: ','', $avatar_url[5]);
     return $avatar;
