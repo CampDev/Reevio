@@ -22,39 +22,32 @@ if (!function_exists('http_parse_headers')) {
 }
 
 //Function to discovery an entity's meta post
-function discover_link($entity_uri, $debug){
+function discover_link($entity_uri){
         $entity_sub = substr($entity_uri, 0, strlen($entity_uri)-1);
         $header_result = get_headers($entity_uri);
-        $discovery_link = str_replace("<", "", $header_result[2]);
-		$discovery_link = str_replace(">", "", $discovery_link);
+        $discovery_link = str_replace("<", "", $header_result[13]);
+        $discovery_link = str_replace(">", "", $discovery_link);
         $discovery_link = str_replace("Link: ", "", $discovery_link);
-		$discovery_link = str_replace('; rel="https://tent.io/rels/meta-post"', "", $discovery_link);
-       	$ch = curl_init();
+        $discovery_link = str_replace('; rel="https://tent.io/rels/meta-post"', "", $discovery_link);
+        $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $entity_sub.$discovery_link);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	    $meta = json_decode(curl_exec($ch));
-	    curl_close($ch);
-	    if ($debug == true) {
-            echo "<p><b>Entity-Sub: </b>".$entity_sub.$discovery_link."</p>";
-            echo "<hr /><p><b>Header: </b></p>";
-            var_dump($header_result);
-            echo "<p><b>Status: ".$header_result[0]."</b></p>";
-            echo "<p><b>Length: ".$header_result[1]."</b></p>";
-            echo "<hr /><p><b>Discovered Link: </b></p>";
-            echo "<p>".$discovery_link."</p>";
-            echo "<hr /> <p><b>Meta Post: </b></p>";	
-	     	var_export($meta);
-	        }
-	    return $meta;
+        $meta = json_decode(curl_exec($ch));
+        curl_close($ch);
+        return $meta;
 }
 
 function recent_statuses($url) {
 	$ch = curl_init();
+    $log = fopen('status_log.txt', 'w');
 	curl_setopt($ch, CURLOPT_URL, $url);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	$post = json_decode(curl_exec($ch));
+    curl_setopt($ch, CURLOPT_VERBOSE, 1);
+    curl_setopt($ch, CURLOPT_STDERR, $log);
+	$posts = json_decode(curl_exec($ch));
 	curl_close($ch);
-	return $post->posts;
+    fclose($log);
+	return $posts->posts;
 }
 
 function request_profile($profile_url) {
@@ -66,6 +59,10 @@ function request_profile($profile_url) {
 	return $profile;
 }
 
+$meta = discover_link($app['reevio.config']['entity_uri']);
+
+$app['posts_feed'] = $meta->post->content->servers[0]->urls->posts_feed;
+
 $app['reevio.profile'] = $app->share(function () use ($app) {
     $meta = discover_link($app['reevio.config']['entity_uri'], false);
 	$profile = $meta->post->content->profile;
@@ -73,7 +70,7 @@ $app['reevio.profile'] = $app->share(function () use ($app) {
 });
 
 $app['reevio.recent_statuses'] = $app->share(function () use ($app) {
-	$status_url = $app['reevio.config']['entity_uri'].'posts?limit='.$app['reevio.config']['statuses_sidebar'].'&types=https%3A%2F%2Ftent.io%2Ftypes%2Fstatus%2Fv0%23';
+	$status_url = $app['posts_feed'].'?types=https%3A%2F%2Ftent.io%2Ftypes%2Fstatus%2Fv0%23&limit='.$app['reevio.config']['statuses_sidebar'];
 	$posts = recent_statuses($status_url);
 	return $posts;
 });
