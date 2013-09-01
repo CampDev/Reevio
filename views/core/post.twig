@@ -1,6 +1,8 @@
 {% extends "layout.twig" %}
 {% if post.content.title is defined %}
 {% set title %}{{ post.content.title }}{% endset %}
+{% else %}
+{% set title %}Untitled{% endset %}
 {% endif %}
 {% block content %}
     <article>
@@ -11,13 +13,9 @@
                 Untitled
             {% endif %}
         </h1>
-        <div class="time">{{ post.publishedAt|date('r') }}</div>
+        <div class="time">{{ post.published_at|date('Y-M-j - H:i') }}</div>
         <div class="seperator"></div>
         {{ post.content.body|raw }}
-        {% if post.content.tags is defined %}
-            <div class="seperator"></div>
-            <div id="tags">{{ post.content.tags }}</div>
-        {% endif %}
     </article>
     <!--
     <div style="margin: auto; text-align:center;">

@@ -1,4 +1,4 @@
-entity_uri = https://cacauu.tent.is
+entity_uri = https://entity.tent-server.com
 bloghost = http://cacauu.de
 blogtitle = Cacauu
 imprinturl = http://cacauu.de/imprint.php
@@ -6,4 +6,3 @@ language = en
 description = Blog about technology, coding and other stuff
 displayed_essays = 10
 statuses_sidebar = 5
-statuses_profile = 10

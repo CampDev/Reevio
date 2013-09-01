@@ -1,23 +1,19 @@
 <aside> <!-- Sidebar -->
-	<div id="avatar"><img src="{{ profile.basic.avatar_url }}" /></div>
-	<div id="name">{{ profile.basic.name }}</div>
+	<div id="avatar"><img src="{{ avatar }}" /></div>
+	{% if profile.name %}
+		<div id="name">{{ profile.name }}</div>
+	{% endif %}
 	<div id="clear"></div>
 	<div id="information">
-		{% if profile.basic.gender %}
-			<div class="information">{{ profile.basic.gender }}</div>
+		{% if profile.location %}
+			<div class="information">{{ profile.location }}</div>
 		{% endif %}
-		{% if profile.basic.location %}
-			<div class="information">{{ profile.basic.location }}</div>
-		{% endif %}
-		{% if profile.basic.birthdate %}
-			<div class="information">{{ profile.basic.birthdate }}</div>
-		{% endif %}
-		{% if profile.basic.website_url %}
-			<div class="information"><a href="{{ profile.basic.website_url }}">{{ profile.basic.website_url }}</a></div>
+		{% if profile.website %}
+			<div class="information"><a href="{{ profile.website }}">{{ profile.website }}</a></div>
 		{% endif %}
 	</div>
 	<div class="seperator"></div>
-	<div id="bio">{{ profile.basic.bio }}</div>
+	<div id="bio">{{ profile.bio }}</div>
 	<div class="seperator"></div>
 	<!--
 	<div style="margin: auto; text-align:center;">
@@ -30,9 +26,7 @@
 	<h1>Latest statuses</h1>
 	<div id="status">
 		{% for status in recent_statuses %}
-			{% if not status.mentions %}
-				<div class="status"><a href="{{ reevio.entity_uri }}/posts/{{ status.id }}">{{ status.content.text }}</a></div>
-			{% endif %}
+			<div class="status">{{ tent_markdown(status.content.text) }}</div>
 		{% endfor %}
 	</div>
 	{% endif %}

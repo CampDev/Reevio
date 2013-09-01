@@ -1,89 +1,56 @@
 <?php
-
+ 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+ 
+function request_posts($url) {
+	$log = fopen('request_post_log.txt', 'w');
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_VERBOSE, 1);
+	curl_setopt($ch, CURLOPT_STDERR, $log);
+	$post = json_decode(curl_exec($ch));
+	curl_close($ch);
+	fclose($log);
+	return $post;
+}
+ 
+$app->get('/', function () use ($app) {
+	$meta = discover_link($app['reevio.config']['entity_uri']);
+	$posts_feed = $meta->post->content->servers[0]->urls->posts_feed;
+	$req_url = $posts_feed.'?types=https%3A%2F%2Ftent.io%2Ftypes%2Fessay%2Fv0&limit='.$app['reevio.config']['displayed_essays'];
+	$post = request_posts($req_url);
 
-$app->get('/', function (Request $request) use ($app) {
-    $postCriteria = new Depot\Core\Model\Post\PostCriteria;
-    $postCriteria->limit = isset($app['reevio.config']['displayed_essays'])
-        ? $app['reevio.config']['displayed_essays']
-        : 10;
-    $postCriteria->postTypes = array('https://tent.io/types/post/essay/v0.1.0');
-
-    $paginated = false;
-
-    if ($request->query->get('since')) {
-        $paginated = true;
-        $postCriteria->sinceId = $request->query->get('since');
-        $postCriteria->sinceIdEntity = $app['reevio.config']['entity_uri'];
-    }
-
-    if ($request->query->get('before')) {
-        $paginated = true;
-        $postCriteria->beforeId = $request->query->get('before');
-        $postCriteria->beforeIdEntity = $app['reevio.config']['entity_uri'];
-    }
-
-    $postListResponse = $app['depot.client']->posts()->getPosts(
-        $app['depot.server'],
-        $postCriteria
-    );
-
-    $since = null;
-    if ($postListResponse->previousCriteria()) {
-        $previousPostListResponse = $app['depot.client']->posts()->getPosts(
-            $app['depot.server'],
-            $postListResponse->previousCriteria()
-        );
-        if ($previousPostListResponse->posts()) {
-            $since = $postListResponse->previousCriteria()->sinceId;
-        }
-    }
-
-    $before = null;
-    if ($postListResponse->nextCriteria()) {
-        $nextPostListResponse = $app['depot.client']->posts()->getPosts(
-            $app['depot.server'],
-            $postListResponse->nextCriteria()
-        );
-        if ($nextPostListResponse->posts()) {
-            $before = $postListResponse->nextCriteria()->beforeId;
-        }
-    }
-
-    return $app['twig']->render('index.twig', array(
-        'posts' => $postListResponse->posts(),
-        'since' => $since,
-        'before' => $before,
+	return $app['twig']->render('index.twig', array(
+        'posts' => $post->posts,
     ));
 })->bind('index');
-
+ 
+//Single-Post
 $app->get('/post/{id}', function ($id) use ($app) {
-    $post = $app['depot.client']->posts()->getPost(
-        $app['depot.server'],
-        $id
-    );
-
-    return $app['twig']->render('post.twig', array(
-        'post' => $post,
+	$meta =discover_link($app['reevio.config']['entity_uri']);
+	$entity_url = urlencode(substr($app['reevio.config']['entity_uri'], 0, strlen($app['reevio.config']['entity_uri'])-1));
+	$single_post = $meta->post->content->servers[0]->urls->post;
+	$single_post = str_replace("{entity}", $entity_url, $single_post);
+	$single_post = str_replace("{post}", $id, $single_post);
+	$req_url = $single_post;
+	$post = request_posts($req_url);
+	return $app['twig']->render('post.twig', array(
+        'post' => $post->post,
     ));
 })->bind('post');
-
+ 
+//RSS
 $app->get('/rss.xml', function () use ($app) {
-    $postCriteria = new Depot\Core\Model\Post\PostCriteria;
-    $postCriteria->limit = $app['reevio.config']['displayed_essays'] ?: 10;
-    $postCriteria->postTypes = array('https://tent.io/types/post/essay/v0.1.0');
-
-    $postListResponse = $app['depot.client']->posts()->getPosts(
-        $app['depot.server'],
-        $postCriteria
-    );
-
+	$req_url = $app['posts_feed'].'?types=https%3A%2F%2Ftent.io%2Ftypes%2Fessay%2Fv0';
+	$post = request_posts($req_url);
+ 
     $response = new Response($app['twig']->render('rss.twig', array(
-        'posts' => $postListResponse->posts(),
+        'posts' => $post->posts,
     )));
-
-    $response->headers->set('Content-type', 'text/xml');
-
+     
+$response->headers->set('Content-type', 'text/xml');
+ 
     return $response;
 })->bind('feed');

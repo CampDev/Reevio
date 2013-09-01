@@ -2,8 +2,8 @@
 
 /*
 Information about your Reevio installation:
-Version: 0.1
-Release Date: 03/09/2013
+Version: 0.1.1
+Release Date: TO ADD
 License: BSD 3.0 (see LICENSE.txt)
 */
 
