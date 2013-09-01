@@ -46,17 +46,10 @@ $app->get('/post/{id}', function ($id) use ($app) {
         'post' => $post->post,
     ));
 })->bind('post');
-
-// $app->get('/post/{id}', function ($id) use ($app) {
-// 	$entity_url = urlencode(substr($app['reevio.config']['entity_uri'], 0, strlen($app['reevio.config']['entity_uri'])-1));
-// 	$req_url = 'https://cacauu.cupcake.is/posts/'.$entity_url.'/'.$id;
-// 	$post = request_posts($req_url);
-// 	return $id;
-// });
  
 //RSS
 $app->get('/rss.xml', function () use ($app) {
-	$req_url = $app['reevio.config']['entity_uri'].'posts?types=https%3A%2F%2Ftent.io%2Ftypes%2Fessay%2Fv0';
+	$req_url = $app['posts_feed'].'?types=https%3A%2F%2Ftent.io%2Ftypes%2Fessay%2Fv0';
 	$post = request_posts($req_url);
  
     $response = new Response($app['twig']->render('rss.twig', array(
