@@ -40,19 +40,6 @@ $app->get('/post/{id}', function ($id) use ($app) {
         'post' => $post->post,
     ));
 })->bind('post');
-
-/*$app->get('/{title}/{id}', function ($id) use ($app) {
-	$meta =discover_link($app['reevio.config']['entity_uri']);
-	$entity_url = urlencode(substr($app['reevio.config']['entity_uri'], 0, strlen($app['reevio.config']['entity_uri'])-1));
-	$single_post = $meta->post->content->servers[0]->urls->post;
-	$single_post = str_replace("{entity}", $entity_url, $single_post);
-	$single_post = str_replace("{post}", $id, $single_post);
-	$req_url = $single_post;
-	$post = request_posts($req_url);
-	return $app['twig']->render('post.twig', array(
-        'post' => $post->post,
-    ));
-})->bind('post');*/
  
 //RSS
 $app->get('/rss.xml', function () use ($app) {
