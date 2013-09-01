@@ -50,13 +50,14 @@ function recent_statuses($url) {
 	return $posts->posts;
 }
 
-function request_profile($profile_url) {
-	$init = curl_init();
-	curl_setopt($init, CURLOPT_URL, $profile_url);
-	curl_setopt($init, CURLOPT_RETURNTRANSFER, true);
-	$profile = json_decode(curl_exec($init));
-	curl_close($init);
-	return $profile;
+function request_profile($entity_uri) {
+    $profile = discover_link($entity_uri)->post->content->profile;
+    return $profile;
+}
+
+function request_avatar($entity_uri) {
+    $api_endpoint = discover_link($entity_uri);
+    return $avatar;
 }
 
 $meta = discover_link($app['reevio.config']['entity_uri']);
