@@ -10,6 +10,10 @@ html, body {
 	height: 100%;
 }
 
+body {
+	background-color: #ECECEC;
+}
+
 .wrapper {
 	min-height: 100%;
 	height: auto !important;
@@ -51,7 +55,10 @@ div.header-info {
 	border: 1px #ddd solid;
 	background-color: #FFF;
 	margin: 10px auto 30px auto;
-    padding: 2%, 4%, 2%, 4%;
+	padding: 2%, 4%, 2%, 4%;
+	border-bottom: 3px solid gray;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
 }
 
 .aside {
