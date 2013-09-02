@@ -76,10 +76,6 @@ function request_avatar($entity_uri) {
     return $avatar;
 }
 
-if (substr(urldecode($app['reevio.config']['entity_uri']), -1) != '/') {
-    $app['reevio.config']['entity_uri'] = $app['reevio.config']['entity_uri'].'/';
-}
-
 $meta = discover_link($app['reevio.config']['entity_uri']);
 
 $app['posts_feed'] = $meta->post->content->servers[0]->urls->posts_feed;
