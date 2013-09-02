@@ -1,4 +1,4 @@
-entity_uri = https://entity.tent-server.com
+entity = https://entity.tent-server.com
 bloghost = http://example.com
 blogtitle = My Blog
 imprinturl = http://example.com/imprint.php
