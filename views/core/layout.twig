@@ -47,10 +47,6 @@
 	<div id="clear"></div>
     </div>
 
-        <div id="main" role="main">
-            {% block content %}Nothing to see here{% endblock %}
-        </div>
-
 <aside> 
 	{% if recent_statuses %}
 	<h1 style="margin-top: 20px; text-align: center;">Latest statuses</h1>
@@ -62,6 +58,11 @@
 	{% endif %}
 	<div class="clear_head"></div>
 </aside>
+
+        <div role="main">
+            {% block content %}Nothing to see here{% endblock %}
+        </div>
+
 
         <div class="clear"></div>
 
