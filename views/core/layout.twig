@@ -53,7 +53,7 @@
 
 <aside> 
 	{% if recent_statuses %}
-	<h1>Latest statuses</h1>
+	<h1 style="margin-top: 20px; text-align: center;">Latest statuses</h1>
 	<div id="status">
 		{% for status in recent_statuses %}
 			<div class="status">{{ tent_markdown(status.content.text) }}</div>

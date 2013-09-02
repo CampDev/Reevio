@@ -121,7 +121,7 @@ article p {
 }
 
 article p a {
-	color: #0eade1;
+	color: rgb(0, 97, 173);
 	text-decoration: none;
 }
 
@@ -177,7 +177,7 @@ img {
 }
 
 .readmore a {
-	color: #0eade1;		
+	color: rgb(0, 97, 173);		
 	font-family: 'Roboto', sans-serif;
 	text-align: right;
 	font-weight: 300;
@@ -204,30 +204,20 @@ footer {
 	width: 100%;
     padding-top: 30px;
 	height: 50px;
-	border-top: 1px #aeaeae solid;
+	border-top: 1px #ddd solid;
 }
 
 footer a {
-	color: #2aace6;
-}
-
-#status {
-	width: 100%;
+	color: rgb(0, 97, 173);
 }
 
 #status .status{
-	padding: 2%;
-	margin: 5px auto auto 5px;
+	margin: 20px auto auto 0px;
 	text-align: left;
 	color: #000;
 	border-radius: 5px;
 	overflow: hidden;
 	text-overflow: ellipsis;
-}
-
-#status .status a {
-	color: #000;
-	text-decoration: none;
 }
 
 iframe {
@@ -317,7 +307,7 @@ code {
 	}
 
 	aside a {
-		color: #2aace6;
+		color: rgb(0, 97, 173);
 		text-decoration: none;
 	}
 
@@ -362,7 +352,7 @@ code {
 	}
 
 	footer {
-		background-color: #e9e9e9;
+		background-color: white;
 		margin: auto auto auto 0px;
         padding-top: 30px;
 	    height: 50px;
@@ -484,7 +474,7 @@ code {
 	}
 
 	#information a{
-		color: #2aace6;
+		color: rgb(0, 97, 173);
 		text-decoration: none;
 		font-size: 18px;
 	}
