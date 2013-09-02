@@ -1,5 +1,15 @@
 <?php
-$app['reevio.config'] = parse_ini_file(__DIR__.'/../app.ini');
+$reevio_ini = parse_ini_file(__DIR__.'/../app.ini');
+
+// Adding a / to the entity of missing
+if (substr($reevio_ini['entity'], -1) != '/') {
+    $reevio_ini['entity_uri'] = $reevio_ini['entity'].'/';
+}
+else {
+    $reevio_ini['entity_uri'] = $reevio_ini['entity'];
+}
+
+$app['reevio.config'] = $reevio_ini;
 
 if (!function_exists('http_parse_headers')) {
     function http_parse_headers($headers){
@@ -64,6 +74,10 @@ function request_avatar($entity_uri) {
     $avatar_url = get_headers($avatar_endpoint);
     $avatar = $entity_sub.str_replace('Location: ','', $avatar_url[5]);
     return $avatar;
+}
+
+if (substr(urldecode($app['reevio.config']['entity_uri']), -1) != '/') {
+    $app['reevio.config']['entity_uri'] = $app['reevio.config']['entity_uri'].'/';
 }
 
 $meta = discover_link($app['reevio.config']['entity_uri']);
