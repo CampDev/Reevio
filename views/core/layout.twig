@@ -29,11 +29,11 @@
 
     <div class="header-info">
     <div style="display: table-cell; vertical-align: middle;">
-	<div id="avatar"><img src="{{ avatar }}" /></div>
+	<div id="avatar"><a href="{{ reevio.entity_uri }}" target="_blanc"><img src="{{ avatar }}" /></a></div>
     </div>
     <div style="display: table-cell; vertical-align: middle; padding: 20px;">
 	{% if profile.name %}
-		<div id="name">{{ profile.name }}</div>
+		<div id="name"><a href="{{ reevio.entity_uri }}" target="_blanc">{{ profile.name }}</a></div>
 	{% endif %}
 	<div id="information">
 		{% if profile.location %}
@@ -47,7 +47,7 @@
 	<div id="clear"></div>
     </div>
 
-<aside> 
+<aside>
 	{% if recent_statuses %}
 	<h1 style="margin-top: 20px; text-align: center;">Latest statuses</h1>
 	<div id="status">

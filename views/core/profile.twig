@@ -4,8 +4,8 @@
 {% endif %}
 {% block content %}
     <div id="profile">
-        <div id="avatar"><img src="{{ profile.basic.avatar_url }}" /></div>
-        <div id="name">{{ profile.basic.name }}</div>
+        <div id="avatar"><a href="{{ reevio.entity_uri }}" target="_blanc"><img src="{{ profile.basic.avatar_url }}" /></a></div>
+        <div id="name"><a href="{{ reevio.entity_uri }}" target="_blanc">{{ profile.basic.name }}</a></div>
         <div id="clear"></div>
         <div id="information">
             {% if profile.basic.gender %}
