@@ -244,6 +244,13 @@ code {
 	border: 1px #c1c1c1 solid;
 	margin: auto 3px auto 3px;
 	border-radius: 4px;
+	display: block;
+}
+
+pre {
+	word-break: break-all;
+	word-wrap:break-word;
+	display: block;
 }
 
 /* Desktop */
