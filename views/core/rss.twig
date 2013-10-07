@@ -19,7 +19,7 @@
 				{% endif %}
 			</title>
 			<link>{{ url('post', {'id': post.id}) }}</link>
-			<pubDate>{{ post.published_at|date("Y-M-j - H:i") }}</pubDate>
+			<pubDate>{{ tent_date(post.published_at) }}</pubDate>
 			<source>{{ url('feed') }}</source>
 			{% if post.content.excerpt is defined and post.content.excerpt %}
 				<description>{{ post.content.excerpt }}</description>

@@ -14,7 +14,7 @@
                 Untitled
             {% endif %}
         </h1>
-        <div class="time">{{ post.published_at|date('Y-M-j - H:i') }}</div>
+        <div class="time">{{ tent_date(post.published_at) }}</div>
         <div class="seperator"></div>
         {{ post.content.body|raw }}
     </article>

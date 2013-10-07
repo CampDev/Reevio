@@ -119,6 +119,14 @@ $app['twig'] = $app->share($app->extend('twig', function ($twig, $c) {
     
     $twig->addFunction($tent_markdown);
 
+    $tent_date = new Twig_SimpleFunction('tent_date', function($date) {
+        $date = $date/1000;
+        $date = date('Y-M-j - H:i', $date);
+        return $date;
+    },array('is_safe' => array('html')));
+    
+    $twig->addFunction($tent_date);
+
     $twig->addGlobal('reevio', $c['reevio.config']);
 
     $twig->addGlobal('recent_statuses', $c['reevio.recent_statuses']);
