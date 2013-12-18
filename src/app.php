@@ -109,11 +109,11 @@ $app->register(new Silex\Provider\TwigServiceProvider, array(
 $app['twig'] = $app->share($app->extend('twig', function ($twig, $c) {
 
     $tent_markdown = new Twig_SimpleFunction('tent_markdown', function($status) {
-        $markdown_status = preg_replace("/\*(.*)\*/", "<b>$1</b>", $status); 
-        $markdown_status = preg_replace("/\_(.*)\_/", "<em>$1</em>", $markdown_status);
-        $markdown_status = preg_replace("/\~(.*)\~/", "<del>$1</del>", $markdown_status);
-        $markdown_status = preg_replace("/\`(.*)\`/", "<code>$1</code>", $markdown_status);
-        $markdown_status = preg_replace("/\[(.*)\]\((.*)\)/", "<a href='$2'>$1</a>", $markdown_status);
+        $markdown_status = preg_replace("/\*(.*?)\*/", "<b>$1</b>", $status); 
+        $markdown_status = preg_replace("/\_(.*?)\_/", "<em>$1</em>", $markdown_status);
+        $markdown_status = preg_replace("/\~(.*?)\~/", "<del>$1</del>", $markdown_status);
+        $markdown_status = preg_replace("/\`(.*?)\`/", "<code>$1</code>", $markdown_status);
+        $markdown_status = preg_replace("/\[(.*?)\]\((.*?)\)/", "<a href='$2'>$1</a>", $markdown_status);
         return $markdown_status;
     },array('is_safe' => array('html')));
     
