@@ -12,7 +12,7 @@
             </h1>
             <div class="time">{{ tent_date(post.published_at) }}</div>
             {% if post.content.excerpt is defined and post.content.excerpt %}
-                <p>{{ post.content.excerpt }}</p>
+                <p>{{ post.content.excerpt|raw }}</p>
                 <div class="readmore"><a href="{{ path('post', {'id':post.id}) }}">Read more &rarr;</a></div>
             {% else %}
                 {% if post.content.body is defined %}
