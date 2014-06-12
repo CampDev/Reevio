@@ -38,8 +38,7 @@ function discover_link($entity_uri){
         foreach ($header_result as $header_entry) {
             if (preg_match('/Link: <(.*)>;/', $header_entry, $matches)) {
                 $link = preg_replace("/Link: <(.*)>;.*/", "$1", $header_entry);
-                echo "<p>Link: ".$link."</p>";
-                $discovery_link = "$link";
+                $discovery_link = $link;
             }
         }
         $ch = curl_init();
