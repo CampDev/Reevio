@@ -51,14 +51,11 @@ function discover_link($entity_uri){
 
 function recent_statuses($url) {
 	$ch = curl_init();
-    $log = fopen('status_log.txt', 'w');
 	curl_setopt($ch, CURLOPT_URL, $url);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_VERBOSE, 1);
-    curl_setopt($ch, CURLOPT_STDERR, $log);
 	$posts = json_decode(curl_exec($ch));
 	curl_close($ch);
-    fclose($log);
 	return $posts->posts;
 }
 
