@@ -35,10 +35,13 @@ if (!function_exists('http_parse_headers')) {
 function discover_link($entity_uri){
         $entity_sub = substr($entity_uri, 0, strlen($entity_uri)-1);
         $header_result = get_headers($entity_uri);
-        $discovery_link = str_replace("<", "", $header_result[13]);
-        $discovery_link = str_replace(">", "", $discovery_link);
-        $discovery_link = str_replace("Link: ", "", $discovery_link);
-        $discovery_link = str_replace('; rel="https://tent.io/rels/meta-post"', "", $discovery_link);
+        foreach ($header_result as $header_entry) {
+            if (preg_match('/Link: <(.*)>;/', $header_entry, $matches)) {
+                $link = preg_replace("/Link: <(.*)>;.*/", "$1", $header_entry);
+                echo "<p>Link: ".$link."</p>";
+                $discovery_link = "$link";
+            }
+        }
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $entity_sub.$discovery_link);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
